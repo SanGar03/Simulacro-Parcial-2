@@ -1,9 +1,9 @@
-const IP = "192.168.1.28";
+const IP = "161.35.143.238";
 
-export const fetchPlanets = async () => {
+export const fetchDestinos = async () => {
     try {
-      const response = await fetch(`http://${IP}:8000/planets`);
-      if (!response.ok) throw new Error('Error al obtener los planetas');
+      const response = await fetch(`http://${IP}:8000/sgarcia`);
+      if (!response.ok) throw new Error('Error al obtener los destinos');
       return await response.json();
     } catch (error) {
       console.error(error);
@@ -11,9 +11,9 @@ export const fetchPlanets = async () => {
     }
   };
 
-  export const postPlanets = async (name, description, moons, moon_names, image) => {
+  export const postDestinos = async (name, description, difficulty, favourite) => {
     try {
-      const response = await fetch(`http://${IP}:8000/planets`, {
+      const response = await fetch(`http://${IP}:8000/sgarcia`, {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json', 
@@ -21,9 +21,8 @@ export const fetchPlanets = async () => {
         body: JSON.stringify({ 
           name, 
           description, 
-          moons, 
-          moon_names, 
-          image 
+          difficulty,
+          favourite
         }), 
       });
   
@@ -39,9 +38,9 @@ export const fetchPlanets = async () => {
     }
   };
 
-  export const updatePlanet = async (id, updatedData) => {
+  export const updateDestinos = async (id, updatedData) => {
     try {
-      const response = await fetch(`http://${IP}:8000/planets/${id}`, {
+      const response = await fetch(`http://${IP}:8000/sgarcia/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -49,25 +48,25 @@ export const fetchPlanets = async () => {
         body: JSON.stringify(updatedData),
       });
   
-      if (!response.ok) throw new Error('Error al actualizar el planeta');
+      if (!response.ok) throw new Error('Error al actualizar el destino');
       return await response.json();
     } catch (error) {
-      console.error('Error al actualizar el planeta:', error);
+      console.error('Error al actualizar el destino:', error);
       throw error;
     }
   };
   
-  export const deletePlanet = async (id) => {
+  export const deleteDestino = async (id) => {
     try {
-      const response = await fetch(`http://${IP}:8000/planets/${id}`, {
+      const response = await fetch(`http://${IP}:8000/sgarcia/${id}`, {
         method: 'DELETE',
       });
   
       if (!response.ok) {
-        throw new Error('Error al eliminar el planeta');
+        throw new Error('Error al eliminar el destino');
       }
     } catch (error) {
-      console.error('Error al eliminar el planeta:', error);
+      console.error('Error al eliminar el destino:', error);
       throw error;
     }
   };

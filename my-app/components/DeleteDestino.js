@@ -1,16 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { Alert, Button } from 'react-native';
-import { deletePlanet } from '../services/api';
-import { PlanetContext } from '../context/PlanetContext';
+import { deleteDestino } from '../services/api';
+import { DestinoContext } from '../context/DestinoContext';
 
-const DeletePlanet = ({ planetId, planetName, onDeleteSuccess, onDeleteError }) => {
+const DeleteDestino = ({ destinoId, destinoName, onDeleteSuccess, onDeleteError }) => {
   const [isDeleting, setIsDeleting] = useState(false);
-  const {loadPlanets} = useContext(PlanetContext);
+  const {loadDestinos} = useContext(DestinoContext);
 
   const handleDelete = () => {
     Alert.alert(
       'Confirmar eliminación',
-      `¿Estás seguro de que deseas eliminar el planeta ${planetName}?`,
+      `¿Estás seguro de que deseas eliminar el destino ${destinoName}?`,
       [
         { text: 'Cancelar', style: 'cancel' },
         {
@@ -19,11 +19,11 @@ const DeletePlanet = ({ planetId, planetName, onDeleteSuccess, onDeleteError }) 
           onPress: async () => {
             setIsDeleting(true);
             try {
-              await deletePlanet(planetId);
-              await loadPlanets();
+              await deleteDestino(destinoId);
+              await loadDestinos();
               onDeleteSuccess(); 
             } catch (error) {
-              console.error('Error al eliminar el planeta:', error);
+              console.error('Error al eliminar el destino:', error);
               onDeleteError(error); 
             } finally {
               setIsDeleting(false);
@@ -44,4 +44,4 @@ const DeletePlanet = ({ planetId, planetName, onDeleteSuccess, onDeleteError }) 
   );
 };
 
-export default DeletePlanet;
+export default DeleteDestino;
